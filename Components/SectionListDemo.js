@@ -8,8 +8,8 @@ import {
     Image,
     SectionList,
   } from 'react-native'
-  import NavigationBar from '../Components/SimpleNavigationBar'
-  import theme from '../Components/theme'
+  import NavigationBar from '../tools/SimpleNavigationBar'
+  import theme from '../tools/theme'
 
   export default class SectionListDemo extends Component {
     

@@ -9,25 +9,27 @@ import {
   FlatList,
   TouchableOpacity, 
   Modal, 
+  SectionList
 } from 'react-native';
 
 // 导入本地组件
+import theme from '../tools/theme'
 import ViewDemo from '../Components/ViewDemo'
 import TextDemo from '../Components/TextDemo'
 import NavigatorDemo from '../Components/NavigatorDemo'
 import WebViewDemo from '../Components/WebViewDemo'
+import ButtonDemo from '../Components/ButtonDemo'
 import TextInputDemo from '../Components/TextInputDemo'
 import Flex from '../Components/Flex'
 import ImageDemo from '../Components/ImageDemo'
 import SectionListDemo from '../Components/SectionListDemo'
 
-
 // 全局变量
-var Dimensions = require('Dimensions');
-var ScreenWidth = Dimensions.get('window').width;
-var ScreenHeight = Dimensions.get('window').height;
-var ScreenScale = Dimensions.get('window').scale;
-
+const sections = [
+  {key:'基础组件',data:[{name: 'View - 携程'}, {name: 'Text - 网易新闻'}, {name: 'Button'}, {name: 'Image'}, {name: 'TextInput - 爱燃烧'}, {name: 'WebView'}, ]},
+  {key:'实用组件',data:[{name:'Navigator'},  {name: 'ScrollView'}, {name: 'ListView'}, {name: 'FlatList'},{name: 'SectionList'}, {name: '模态弹出'}, {name: '定时器'}, {name: '动画'},  {name: '手势'},  {name: '绘制'}, ]},
+  {key:'方法功能',data:[{name: '传值'}, {name: '与iOS原生通信'}, {name: '网络请求'}, ]},
+]
 export default class HomePage extends Component {
   // 构造
   constructor(props) {
@@ -36,22 +38,11 @@ export default class HomePage extends Component {
     this.state = {
         isModal:false,
     };
-}
+  }
 
-showModal() {
-    this.setState({
-        isModal:true
-    })
-}
-
-onRequestClose() {
-    this.setState({
-        isModal:false
-    });
-}
-
-render() {
-  const ds = [{name: 'View - 携程'},{name: 'Text - 网易新闻'},{name:'Navigator'},{name: 'WebView'},{name: 'TextInput - 爱燃烧'},{name: 'Image'}, {name: 'FlexBox'},{name: 'SectionList'}, {name: '模态弹出'}, {name: '传值'}, {name: '动画'}, {name: '网络请求'},  {name: '颜色'},  {name: '定时器'},  {name: '手势'},  {name: '绘制'}, ]
+  // 渲染
+  render() {
+    
     return(
         <View style={styles.container}>
             {/* 初始化Modal */}
@@ -68,115 +59,147 @@ render() {
             <View style={styles.heading}>
               <Text style={styles.headText}>React Native 基础知识点</Text>
             </View>
-            <FlatList data={ds} renderItem={this.renderListItem}/>
+            <SectionList
+                    renderSectionHeader={this._sectionHeader}
+                    renderSectionFooter={this._sectionFooter}
+                    renderItem={this._renderItem}
+                    sections={sections}
+                    ItemSeparatorComponent={() => <View style = {{backgroundColor:'lightgray', height:0.5}}></View>}
+                    //ListHeaderComponent={()=><View style={{backgroundColor:'yellow',alignItems: 'center'}}><Text>召唤师</Text></View>}
+                    ListFooterComponent={this._listFooter}
+                />
         </View>
-    );
-}
+    ) 
+  }
 
-  // item 相当于tableView的cell
-  renderListItem = ({item, index}) => {
-    const {navigator} = this.props
+  // 自定义组件
+  _renderItem = (info) => {
+    // 遍历获取 section 的索引
+    var section = 0
+    for (var i in sections) {
+      if(sections[i].data[info.index] == info.item) {
+        section = i
+      }
+    }
+    var text = '  ' + info.item.name 
     return (
-      <TouchableOpacity  activeOpacity={0.8} style={styles.itemText} key={index}  onPress={this.clickItem.bind(this,item,index)}>
-        <Text style={{color: 'black', fontSize:16}}>{item.name}</Text>
-      </TouchableOpacity>
+         <TouchableOpacity activeOpacity={0.8} style={styles.item} onPress={this.clickItem.bind(this, info.item, section, info.index )}>
+         <Text style = {styles.itemText}>{text}</Text>
+       </TouchableOpacity>
     )
   }
 
-  // 点击列表每一行
-  clickItem(item,index) {
-    // alert(index)
-    let _this = this
-    const { navigator } = this.props;
-    if(navigator) {
-      switch (index) {
-        case 0:
+  _sectionHeader = (info) => {
+    var text = info.section.key
+    return (
+        <View  style={styles.section}>
+            <Text style = {styles.sectionText}>{text}</Text>
+        </View>
+    )
+  }
+
+  _sectionFooter = () => {
+    return (
+        <View style = {{flex:1, backgroundColor:'lightgray', height:10}}></View>
+    )
+  }
+
+  _listFooter = () => {
+    return (
+      <View style = {{ height:40.5}}>
+        <View style = {{backgroundColor:'lightgray', marginTop:0, width:theme.screenWidth, height:0.5}}></View>
+        <View style = {{backgroundColor:'white', justifyContent:'center', alignItems:'center',  height:40}}>
+          <Text>持续更新中...</Text>
+        </View>
+      </View>
+      
+  )
+  }
+
+// actions
+// 点击列表每一行
+  clickItem(item, section, index) {
+    const { navigator } = this.props
+    if(section == 0) {
+      if(index == 0) {
         navigator.push({
           name: item.name,
           component: ViewDemo,
           params: {
             id: index,
             name:item.name,
-        }
-      }) 
-      break
-
-      case 1:
-      navigator.push({
-        name: item.name,
-        component: TextDemo,
-        params: {
-          id: index,
-          name:item.name,
+          }
+        }) 
+      }else if(index == 1) {
+        navigator.push({
+          name: item.name,
+          component: TextDemo,
+          params: {
+            id: index,
+            name:item.name,
+          }
+        })
       }
+      else if(index == 2) {
+        navigator.push({
+          name: item.name,
+          component: ButtonDemo,
+          params: {
+            id: index,
+            name:item.name,
+          }
+        })
+      }else if(index == 3) {
+        navigator.push({
+          name: item.name,
+          component: ImageDemo,
+          params: {
+            id: index,
+            name:item.name,
+          }
+        })
+      }else if(index == 4) {
+        this.showModal()
+      }else {
+        navigator.push({
+          name: item.name,
+          component: WebViewDemo,
+          params: {
+            id: index,
+            name:item.name,
+          }
+        })
+      }
+    } else if(section == 1) {
+      if(index == 0) {
+        navigator.push({
+          name: item.name,
+          component: NavigatorDemo,
+          params: {
+            id: index,
+            name:item.name,
+          }
+        })
+      } else if(index == 1) {
+
+      } else {
+        alert(item.name)
+      }
+    }else {
+      alert(item.name)
+    }
+  }
+  showModal() {
+    this.setState({
+        isModal:true
     })
-    break
+  }
 
-    case 2:
-    navigator.push({
-      name: item.name,
-      component: NavigatorDemo,
-      params: {
-        id: index,
-        name:item.name,
-    }
-  })
-  break
-  
-  case 3:
-  navigator.push({
-    name: item.name,
-    component: WebViewDemo,
-    params: {
-      id: index,
-      name:item.name,
-    }
-  })
-  break
-
-  case 4:
-  this.showModal()
-  break
-
-  case 5:
-  navigator.push({
-    name: item.name,
-    component: ImageDemo,
-    params: {
-      id: index,
-      name:item.name,
-    }
-  })
-  break
-
-  case 6:
-  navigator.push({
-    name: item.name,
-    component: Flex,
-    params: {
-      id: index,
-      name:item.name,
-    }
-  })
-  break
-  
-  case 7:
-  navigator.push({
-    name: item.name,
-    component: SectionListDemo,
-    params: {
-      id: index,
-      name:item.name,
-    }
-  })
-  break
-
-    default:
-    alert(index)
-  break;
-      } 
-    }
-  }    
+  onRequestClose() {
+    this.setState({
+        isModal:false
+    });
+  }   
 }
 
 // CSS样式
@@ -188,7 +211,7 @@ const styles = StyleSheet.create({
   status: {
     backgroundColor:'#6495ED',
     marginTop:0,
-    width:ScreenWidth,
+    width:theme.screenWidth,
     height:20
   },
   // 导航栏
@@ -198,37 +221,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center', // 内容居中显示
     backgroundColor: '#6495ED',
-    marginBottom: 10
   },
   // 导航栏文字
   headText: {
     color: 'black',
     fontSize: 17
   },
-  ListRow: {
-    flex:1,
-    flexDirection:'column',
-    justifyContent:'center',
-    height:40,
-    textAlign:'center'
-  },
-  flex:{
-    flex: 1,
-  },
-  list_item:{
-    height:40,
-    marginLeft:10,
-    marginRight:10,
-    borderBottomWidth:1,
-    borderBottomColor: '#ddd',
-    justifyContent: 'center'
-  },
-  list_item_font:{
-    fontSize:16
-  },
-  navBar: {
-    backgroundColor: 'white',
-    },
     navBarText: {
       fontSize: 16,
       marginVertical: 10,
@@ -260,5 +258,28 @@ const styles = StyleSheet.create({
       backgroundColor:'orange',
       alignItems:'center',
       justifyContent:'center'
+  },
+
+  section: {
+    flex:1,
+    justifyContent:'center',
+    height: 50,
+    backgroundColor: '#9CEBBC',
+    paddingLeft:10
+},
+  sectionText: {
+      color: 'white', 
+      fontSize: 20
+  },
+  item: {
+      flex:1,  
+      justifyContent:'center',
+      height:44, 
+      backgroundColor: "#ffffff",
+      paddingLeft:10
+  },
+  itemText: {
+      color: '#5C5C5C', 
+      fontSize: 15, 
   }
 })

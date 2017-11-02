@@ -1,6 +1,6 @@
 'use strict'
 import { Dimensions, Platform } from 'react-native'
-import px2dp from '../Components/px2dp'
+import px2dp from '../tools/px2dp'
 
 const globalTextColor = '#313131'
 const globalSubTextColor = '#898989'

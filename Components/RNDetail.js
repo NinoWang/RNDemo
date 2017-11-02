@@ -1,6 +1,6 @@
 import React, { Component,PropTypes } from 'react';
 import { Platform, StyleSheet, View, Text, TouchableHighlight, TouchableOpacity } from 'react-native';
-import NavigationBar from '../Components/SimpleNavigationBar'
+import NavigationBar from '../tools/SimpleNavigationBar'
 
 export default class RNDetail extends Component {
 

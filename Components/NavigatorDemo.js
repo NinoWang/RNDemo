@@ -1,6 +1,6 @@
 import React, { Component,PropTypes } from 'react';
 import { Platform, StyleSheet, View, Text, PixelRatio } from 'react-native';
-import NavigationBar from '../Components/SimpleNavigationBar'
+import NavigationBar from '../tools/SimpleNavigationBar'
 import RNDetail from '../Components/RNDetail'
 import NavigatorDemo from '../Components/NavigatorDemo'
 

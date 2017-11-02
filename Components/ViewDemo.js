@@ -1,6 +1,6 @@
 import React, { Component,PropTypes } from 'react';
 import { Platform, StyleSheet, View, Text, PixelRatio } from 'react-native';
-import NavigationBar from '../Components/SimpleNavigationBar'
+import NavigationBar from '../tools/SimpleNavigationBar'
 
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;

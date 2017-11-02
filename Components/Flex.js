@@ -1,6 +1,6 @@
 import React, { Component,PropTypes } from 'react';
 import { Platform, StyleSheet, View, Text, TouchableHighlight, TouchableOpacity } from 'react-native';
-import NavigationBar from '../Components/SimpleNavigationBar'
+import NavigationBar from '../tools/SimpleNavigationBar'
 
 const USER_MODELS = {
     1: { name: 'Nino', age: 23 },

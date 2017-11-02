@@ -5,7 +5,7 @@ import {
     StyleSheet, 
     View, 
     Text,
-    Image
+    Button
   } from 'react-native'
   import NavigationBar from '../tools/SimpleNavigationBar'
   import theme from '../tools/theme'
@@ -37,13 +37,17 @@ import {
                     backOnPress={this.navPop.bind(this)}
                 />}
                 <View style = {styles.container}>
-                    <Text style = {styles.titleLabel}>本地图片</Text>
-                    <Image source={require('../img/bdf.png')} style={{marginBottom:20}}></Image>
-                    <Text style = {styles.titleLabel}>网络图片</Text>
-                    <Image 
-                        source={{uri: 'http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=3be83f1446086e067ea537086a611181/1c950a7b02087bf489a0f4ccf8d3572c11dfcf43.jpg'}}
-                        style={{width: 300, height: 193}}>
-                    </Image>
+                    <Button
+                        onPress={this._onButtonPress}
+                        title="This looks great!"
+                        accessibilityLabel="This sounds great!"
+                    />
+                    <Button
+                        onPress={this._onButtonPress}
+                        title="Ok!"
+                        color="#841584"
+                        accessibilityLabel="Ok, Great!"
+                    />
                 </View>
                 
             </View> 
@@ -55,6 +59,10 @@ import {
         if(navigator) {
             navigator.pop()
         }
+    }
+
+    _onButtonPress = () => {
+        alert('Button has been pressed!');
     }
 
   }
