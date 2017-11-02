@@ -1,1 +1,6 @@
-*.json linguist-language=JavaScript
+*.json linguist-language = JavaScript
+*.js linguist-language = JavaScript
+*.h linguist-language = JavaScript
+*.m linguist-language = JavaScript
+*.java linguist-language = JavaScript
+*. linguist-language = JavaScript
