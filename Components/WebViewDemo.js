@@ -3,18 +3,14 @@ import { Platform, StyleSheet, View, Text, PixelRatio, WebView } from 'react-nat
 import NavigationBar from '../tools/SimpleNavigationBar'
 import RNDetail from '../Components/RNDetail'
 import NavigatorDemo from '../Components/NavigatorDemo'
-
-var Dimensions = require('Dimensions');
-var ScreenWidth = Dimensions.get('window').width;
-var ScreenHeight = Dimensions.get('window').height;
-var ScreenScale = Dimensions.get('window').scale;
+import theme from '../tools/theme'
 
 var DEFAULT_URL = 'https://www.douban.com'
 const HTML = `
 <!DOCTYPE html>\n
 <html>
   <head>
-    <title>Hello Static World</title>
+    <title>这是一个通过html渲染的网页</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=320, user-scalable=no">
     <style type="text/css">
@@ -22,10 +18,10 @@ const HTML = `
         margin: 0;
         padding: 0;
         font: 62.5% arial, sans-serif;
-        background: #ccc;
+        background: #E6E6FA;
       }
       h1 {
-        padding: 45px;
+        padding: 100px;
         margin: 0;
         text-align: center;
         color: #33f;
@@ -33,7 +29,7 @@ const HTML = `
     </style>
   </head>
   <body>
-    <h1>Hello Static World</h1>
+    <h1>这是一个通过html渲染的网页，下面是通过url加载的网页</h1>
   </body>
 </html>
 `;
@@ -62,6 +58,16 @@ export default class WebViewDemo extends Component {
                 backOnPress={this.navPop.bind(this)}
                 />} 
                 <View style = {styles.item}>
+                    <View style={styles.title}>
+                        <Text>HTML WebView</Text>
+                    </View>
+                    <WebView style={styles.webview}  
+                    source={{html:HTML}}  
+                    >  
+                    </WebView>
+                </View>
+
+                <View style = {styles.item}>
                     <View  style={styles.title}>
                         <Text>Url WebView</Text>
                     </View>
@@ -73,16 +79,6 @@ export default class WebViewDemo extends Component {
                     >  
                     </WebView>
                 </View>
-                <View style = {styles.item}>
-                    <View style={styles.title}>
-                        <Text>HTML WebView</Text>
-                    </View>
-                    <WebView style={styles.webview}  
-                    source={{html:HTML}}  
-                    >  
-                    </WebView>
-                </View>
-                
             </View>
                 
         )
@@ -102,15 +98,15 @@ const styles = StyleSheet.create ({
     },
     item:{ 
         flex:1,
-        width:ScreenWidth, 
+        width:theme.screenWidth, 
      },
      title: {
-        height:40, 
-        flexDirection:'row', 
-        justifyContent:'center', 
-        alignItems:'center',
-        backgroundColor:'yellow',
-        
+        fontSize:17,
+        color:theme.globalTextColor,
+        marginTop:20,
+        marginLeft:20,
+        marginBottom:10,
+        fontWeight:'bold'
      },
     
 

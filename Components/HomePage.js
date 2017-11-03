@@ -9,7 +9,7 @@ import {
   FlatList,
   TouchableOpacity, 
   Modal, 
-  SectionList
+  SectionList,
 } from 'react-native';
 
 // 导入本地组件
@@ -26,7 +26,7 @@ import SectionListDemo from '../Components/SectionListDemo'
 
 // 全局变量
 const sections = [
-  {key:'基础组件',data:[{name: 'View - 携程'}, {name: 'Text - 网易新闻'}, {name: 'Button'}, {name: 'Image'}, {name: 'TextInput - 爱燃烧'}, {name: 'WebView'}, ]},
+  {key:'基础组件',data:[{name: 'View - 携程'}, {name: 'Text - 网易新闻'}, {name: '“Button” - 三种按钮'}, {name: 'Image'}, {name: 'TextInput - 爱燃烧'}, {name: 'WebView'}, ]},
   {key:'实用组件',data:[{name:'Navigator'},  {name: 'ScrollView'}, {name: 'ListView'}, {name: 'FlatList'},{name: 'SectionList'}, {name: '模态弹出'}, {name: '定时器'}, {name: '动画'},  {name: '手势'},  {name: '绘制'}, ]},
   {key:'方法功能',data:[{name: '传值'}, {name: '与iOS原生通信'}, {name: '网络请求'}, ]},
 ]

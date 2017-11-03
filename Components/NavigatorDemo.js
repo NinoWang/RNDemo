@@ -10,11 +10,9 @@ var ScreenHeight = Dimensions.get('window').height;
 var ScreenScale = Dimensions.get('window').scale;
 
 //关键代码
-var {
-    NativeModules
-  } = require('react-native');
-  var RNBridgeModule = NativeModules.PushNative;
-  var TestController = NativeModules.TestController;
+var { NativeModules } = require('react-native');
+var RNBridgeModule = NativeModules.PushNative;
+var TestController = NativeModules.TestController;
 export default class TextInputDemo extends Component {
     constructor(props) {
         super(props);
@@ -107,5 +105,3 @@ const styles = StyleSheet.create ({
     
 
 })
-
-// export default RNDetail 

@@ -61,10 +61,11 @@ import {
 
   const styles = StyleSheet.create({
       container: {
-          padding:20
+          padding:20,
       },
       titleLabel: {
           fontSize:17,
-          color:theme.globalTextColor
+          color:theme.globalTextColor,
+          marginBottom:10
       }
   })
