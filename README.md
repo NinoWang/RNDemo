@@ -21,5 +21,3 @@
   [5]: https://www.jianshu.com/p/4ec889232766
   [6]: http://bbs.reactnative.cn/topic/130/%E6%96%B0%E6%89%8B%E5%BF%85%E8%AF%BB-react-native%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98
   [7]: https://race604.com/react-native-component-lifecycle/
-  
-  
